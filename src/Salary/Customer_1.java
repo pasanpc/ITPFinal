@@ -701,7 +701,7 @@ public class Customer_1 extends javax.swing.JFrame {
     
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        AddCustomers_1 ac = new AddCustomers_1();
+        AddCustomers ac = new AddCustomers();
         ac.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed

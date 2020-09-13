@@ -36,6 +36,24 @@ public class addasupplier extends javax.swing.JFrame {
     
      Connection con;
      PreparedStatement pst; 
+     
+     public void Connect()
+            
+    {
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            try {
+            con = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/stock","root","root");
+            } catch (SQLException ex) {
+                Logger.getLogger(addsuplir.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(addsuplir.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     
    
@@ -320,7 +338,7 @@ public class addasupplier extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
-            String PATTERN = "[a-zA-Z]{2,30}$";
+        String PATTERN = "[a-zA-Z]{2,30}$";
         Pattern patt = Pattern.compile(PATTERN);
         Matcher match = patt.matcher(txtsname.getText());
         if(!match.matches()){

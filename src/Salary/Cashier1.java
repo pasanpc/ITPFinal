@@ -622,9 +622,29 @@ public class Cashier1 extends javax.swing.JFrame {
             String cus = txtid.getText();
             int lastinsertid = 0;
             
+            
             Class.forName("com.mysql.jdbc.Driver");
             con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/stock","root","root");
             
+            if (cus.trim().isEmpty()) {
+            String query = "insert into sales(Date,SubTotal,Pay,Balance)Values(?,?,?,?)";
+             
+            insert1 = con1.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            insert1.setString(1, date);
+            insert1.setString(2, subtot);
+            insert1.setString(3, pay);
+            insert1.setString(4, bal);
+            insert1.executeUpdate();
+            
+            ResultSet generatedKeyResult = insert1.getGeneratedKeys();
+            
+            if(generatedKeyResult.next()){
+                
+                lastinsertid = generatedKeyResult.getInt(1);
+            }
+            }
+            
+            else{
             String query = "insert into sales(Date,SubTotal,Pay,Balance,customerId)Values(?,?,?,?,?)";
              
             insert1 = con1.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
@@ -640,6 +660,9 @@ public class Cashier1 extends javax.swing.JFrame {
                 
                 lastinsertid = generatedKeyResult.getInt(1);
             }
+            }
+            
+
             
             int rows = jTable1.getRowCount();
             
@@ -677,7 +700,6 @@ public class Cashier1 extends javax.swing.JFrame {
                 
                 insert1.setString(1, qty);
                 insert1.setString(2, product_id);
-                
                 insert1.execute();
             }
             
@@ -688,6 +710,8 @@ public class Cashier1 extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Cashier1.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(Cashier1.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (NumberFormatException ex) {
             Logger.getLogger(Cashier1.class.getName()).log(Level.SEVERE, null, ex);
         }
         
