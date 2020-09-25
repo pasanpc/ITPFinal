@@ -13,41 +13,48 @@ import javax.swing.table.TableModel;
  *
  * @author harsh
  */
-public class print extends javax.swing.JFrame {
+public class SalesReportPrint extends javax.swing.JFrame {
 
     /**
-     * Creates new form print
+     * Creates new form SalesReportPrint
      */
-    public print() {
+    public SalesReportPrint() {
         initComponents();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
-    String ldiscount;
+    String ltotal;
+    String lmonth;
+    String ldis ;
     String lsub;
-    String lpay;
-    String lbal;
+    int lyear;
     
-    public print(String sub,String pay, String bal,TableModel tableModel, String discount) throws PrinterException {
+    SalesReportPrint(String tot,String dis,String sub,TableModel tableModel,int year, String month ) throws PrinterException {
         initComponents();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.ldiscount = discount;
-        this.lsub = sub;
-        this.lpay = pay;
-        this.lbal = bal;
         
-        txtprint.setText(txtprint.getText()+"*****************************************\n");
-        txtprint.setText(txtprint.getText()+"********* Nimalsiri Book Shop ***********\n");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        this.ltotal = tot;
+        this.ldis = dis;
+        this.lsub = sub;
+        this.lyear = year;
+        this.lmonth = month;
+        
+        txtprint.setText(txtprint.getText()+"************************************************************************\n");
+        txtprint.setText(txtprint.getText()+"************************ Nimalsiri Book Shop ***************************\n");
+        txtprint.setText(txtprint.getText()+"************************ Monthly Sales Report **************************\n");
         txtprint.setText(txtprint.getText()+"\n");
-        txtprint.setText(txtprint.getText()+"Product"+"\t"+"Price"+"\t"+"Total\n");
+        txtprint.setText(txtprint.getText()+"Product Id"+"\t"+"Date"+"\t\t"+"Price"+"\t"+"Qty"+"\t"+"Total"+"\n");
         
         for(int i=0;i<tableModel.getRowCount();i++){
             
-            String product = (String) tableModel.getValueAt(i, 1);
+            String proid = (String) tableModel.getValueAt(i, 0);
+            String Date = (String) tableModel.getValueAt(i, 1);
             String price = (String) tableModel.getValueAt(i, 2);
+            String qty = (String) tableModel.getValueAt(i, 3);
             float total = (float) tableModel.getValueAt(i, 4);
             
-            txtprint.setText(txtprint.getText()+product+"\t"+price+"\t"+total+"\n");
+            
+            txtprint.setText(txtprint.getText()+proid+"\t"+Date+"\t"+price+"\t"+qty+"\t"+total+"\n");
             
             
             
@@ -56,14 +63,13 @@ public class print extends javax.swing.JFrame {
         txtprint.setText(txtprint.getText()+"\n");
         txtprint.setText(txtprint.getText()+"\n");
         
-        txtprint.setText(txtprint.getText()+"                  "+"Discount : Rs."+ discount +"\n");
-        txtprint.setText(txtprint.getText()+"                  "+"SubTotal : Rs."+ sub +"\n");
-        txtprint.setText(txtprint.getText()+"                  "+"Pay        : Rs."+ pay +"\n");
-        txtprint.setText(txtprint.getText()+"                  "+"Balance  : Rs."+ bal +"\n");
+        txtprint.setText(txtprint.getText()+"Total Sold Item price for "+year+" "+month+ " Month : Rs."+ tot +"\n");
+        txtprint.setText(txtprint.getText()+"Total Discount for "+year+" "+month+ " Month : Rs."+ dis +"\n");
+        txtprint.setText(txtprint.getText()+"Total Income for "+year+" "+month+ " Month : Rs."+ sub +"\n\n");
         
-         txtprint.setText(txtprint.getText()+"*****************************************\n");
-         txtprint.setText(txtprint.getText()+"*****************************************\n");
-         txtprint.setText(txtprint.getText()+"Thank you! Come Again.................!!!!\n");
+         txtprint.setText(txtprint.getText()+"***************************************************************************\n");
+         txtprint.setText(txtprint.getText()+"***************************************************************************\n");
+         txtprint.setText(txtprint.getText()+"...................................Thank you............................!!!!\n");
          
          txtprint.print();
         
@@ -71,10 +77,6 @@ public class print extends javax.swing.JFrame {
         
         
     }
-
-
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,15 +100,11 @@ public class print extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -129,22 +127,14 @@ public class print extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(print.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalesReportPrint.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(print.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalesReportPrint.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(print.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalesReportPrint.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(print.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalesReportPrint.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -157,7 +147,7 @@ public class print extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new print().setVisible(true);
+                new SalesReportPrint().setVisible(true);
             }
         });
     }

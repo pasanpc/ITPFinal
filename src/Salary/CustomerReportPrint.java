@@ -5,17 +5,72 @@
  */
 package Salary;
 
+import java.awt.print.PrinterException;
+import javax.swing.JFrame;
+import javax.swing.table.TableModel;
+
 /**
  *
- * @author Pasan's Pc
+ * @author harsh
  */
 public class CustomerReportPrint extends javax.swing.JFrame {
 
     /**
-     * Creates new form CustomerReportPrint
+     * Creates new form SalesReportPrint
      */
     public CustomerReportPrint() {
         initComponents();
+    }
+    
+    String ltotal;
+    String lmonth;
+    String ldis ;
+    String lsub;
+    int lyear;
+    
+    CustomerReportPrint(String tot,TableModel tableModel,int year, String month ) throws PrinterException {
+        initComponents();
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        this.ltotal = tot;
+        this.lyear = year;
+        this.lmonth = month;
+        
+        txtprint.setText(txtprint.getText()+"************************************************************************\n");
+        txtprint.setText(txtprint.getText()+"************************ Nimalsiri Book Shop ***************************\n");
+        txtprint.setText(txtprint.getText()+"************************ Monthly Sales Report **************************\n");
+        txtprint.setText(txtprint.getText()+"\n");
+        txtprint.setText(txtprint.getText()+"Customer ID"+"\t"+"Customer Name"+"\t"+"Contact Number"+"\t"+"Total Amount"+"\n");
+        
+        for(int i=0;i<tableModel.getRowCount();i++){
+            
+            String cusId = (String) tableModel.getValueAt(i, 0);
+            String cusName = (String) tableModel.getValueAt(i, 1);
+            String ContactNo = (String) tableModel.getValueAt(i, 2);
+            String total = (String) tableModel.getValueAt(i, 3);
+            
+            
+            txtprint.setText(txtprint.getText()+cusId+"\t"+cusName+"\t"+ContactNo+"\t\t"+total+"\n");
+            
+            
+            
+        }
+        
+        txtprint.setText(txtprint.getText()+"\n");
+        txtprint.setText(txtprint.getText()+"\n");
+        
+        txtprint.setText(txtprint.getText()+"Total purchase of Loyal customers for "+year+" "+month+ " Month : Rs."+ tot +"\n");
+        
+         txtprint.setText(txtprint.getText()+"***************************************************************************\n");
+         txtprint.setText(txtprint.getText()+"***************************************************************************\n");
+         txtprint.setText(txtprint.getText()+"...................................Thank you............................!!!!\n");
+         
+         txtprint.print();
+        
+        
+        
+        
     }
 
     /**
@@ -27,20 +82,24 @@ public class CustomerReportPrint extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtPrint = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtprint = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(210, 307));
+
+        txtprint.setColumns(20);
+        txtprint.setRows(5);
+        jScrollPane1.setViewportView(txtprint);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtPrint, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtPrint, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -72,6 +131,37 @@ public class CustomerReportPrint extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CustomerReportPrint.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -82,6 +172,7 @@ public class CustomerReportPrint extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField txtPrint;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea txtprint;
     // End of variables declaration//GEN-END:variables
 }
